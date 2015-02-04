@@ -82,3 +82,14 @@ plot(pix)
 tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = "2000-01-01")
 ```
 
+To display a plot of the time series of each of the bands, set `ggplot` to `TRUE`. The `ggplot2` packages must be installed for this to work.
+
+```{r ggplot, eval=FALSE}
+tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = "2000-01-01", ggplot = TRUE)
+```
+
+The `percNA` argument controls the image chips that are 'allowed' in the series. A value of 100 allows all images (ie. max percNA = 100%), whereas a value of 0 omits all image chips with any NA's (from cloud cover or SLC-off gaps). So, to see only images with no NA's starting in 2005:
+
+```{r percNA, eval=FALSE}
+tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = "2005-01-01", percNA = 0)
+```

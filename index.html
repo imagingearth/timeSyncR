@@ -234,6 +234,31 @@ s$date
 all(getZ(g) == s$date)
 </code></pre>
 
+<p>With these RasterBricks in our workspace, we are ready to look at some image chips using <code>tsChipsRGB</code>. It is always a good idea to check out the help file (<code>?tsChipsRGB</code>) before diving in. In this example, we will take an (x,y) coordinate and focus in on that point.</p>
+
+<pre><code class="r">xy &lt;- c(472200, -1294620)
+tsChipsRGB(xr = r, xg = g, xb = b, loc = xy, start = &quot;2000-01-01&quot;)
+# reset plotting device (optional)
+dev.off()
+</code></pre>
+
+<p>If you need to focus on a single pixel, you can use <code>pixelToPolygon()</code> to convert the coordinates to a SpatialPolygons object representing the outline of that pixel. The SpatialPolygons object can be supplied to <code>loc</code> instead of the xy vector in that case.</p>
+
+<pre><code class="r">pix &lt;- pixelToPolygon(x = r, cell = xy)
+plot(pix)
+tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = &quot;2000-01-01&quot;)
+</code></pre>
+
+<p>To display a plot of the time series of each of the bands, set <code>ggplot</code> to <code>TRUE</code>. The <code>ggplot2</code> packages must be installed for this to work.</p>
+
+<pre><code class="r">tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = &quot;2000-01-01&quot;, ggplot = TRUE)
+</code></pre>
+
+<p>The <code>percNA</code> argument controls the image chips that are &#39;allowed&#39; in the series. A value of 100 allows all images (ie. max percNA = 100%), whereas a value of 0 omits all image chips with any NA&#39;s (from cloud cover or SLC-off gaps). So, to see only images with no NA&#39;s starting in 2005:</p>
+
+<pre><code class="r">tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = &quot;2005-01-01&quot;, percNA = 0)
+</code></pre>
+
 </body>
 
 </html>

@@ -64,3 +64,35 @@ s$date
 all(getZ(g) == s$date)
 ```
 
+With these RasterBricks in our workspace, we are ready to look at some image chips using `tsChipsRGB`. It is always a good idea to check out the help file (`?tsChipsRGB`) before diving in. In this example, we will take an (x,y) coordinate and focus in on that point.
+
+
+```r
+xy <- c(472200, -1294620)
+tsChipsRGB(xr = r, xg = g, xb = b, loc = xy, start = "2000-01-01")
+# reset plotting device (optional)
+dev.off()
+```
+
+If you need to focus on a single pixel, you can use `pixelToPolygon()` to convert the coordinates to a SpatialPolygons object representing the outline of that pixel. The SpatialPolygons object can be supplied to `loc` instead of the xy vector in that case.
+
+
+```r
+pix <- pixelToPolygon(x = r, cell = xy)
+plot(pix)
+tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = "2000-01-01")
+```
+
+To display a plot of the time series of each of the bands, set `ggplot` to `TRUE`. The `ggplot2` packages must be installed for this to work.
+
+
+```r
+tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = "2000-01-01", ggplot = TRUE)
+```
+
+The `percNA` argument controls the image chips that are 'allowed' in the series. A value of 100 allows all images (ie. max percNA = 100%), whereas a value of 0 omits all image chips with any NA's (from cloud cover or SLC-off gaps). So, to see only images with no NA's starting in 2005:
+
+
+```r
+tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = "2005-01-01", percNA = 0)
+```
