@@ -3,7 +3,7 @@ timeSyncR
 
 ## Introduction
 
-Welcome to the timeSyncR page! timeSyncR is a package loosely based on the timeSync method for interpreting satellite image time series for calibration and validation of change methods and products. This version has been developed with and for RStudio. 
+Welcome to the <a href="http://github.com/bendv/timeSyncR">timeSyncR</a> page! timeSyncR is a package loosely based on the timeSync method for interpreting satellite image time series for calibration and validation of change methods and products. This version has been developed with and for RStudio. 
 
 At the moment only Landsat data are supported. In theory, however, any raster data should work, provided the write metadata are there (more on that later).
 
