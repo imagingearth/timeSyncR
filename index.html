@@ -1,21 +1,139 @@
 <!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
 
 <title>timeSyncR</title>
 
-<script type="text/javascript">
-window.onload = function() {
-  var imgs = document.getElementsByTagName('img'), i, img;
-  for (i = 0; i < imgs.length; i++) {
-    img = imgs[i];
-    // center an image if it is the only element of its parent
-    if (img.parentElement.childElementCount === 1)
-      img.parentElement.style.textAlign = 'center';
-  }
-};
-</script>
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
 
 <!-- Styles for R syntax highlighter -->
 <style type="text/css">
@@ -25,21 +143,19 @@ window.onload = function() {
    }
 
    pre .literal {
-     color: #990073
+     color: rgb(88, 72, 246)
    }
 
    pre .number {
-     color: #099;
+     color: rgb(0, 0, 205);
    }
 
    pre .comment {
-     color: #998;
-     font-style: italic
+     color: rgb(76, 136, 107);
    }
 
    pre .keyword {
-     color: #900;
-     font-weight: bold
+     color: rgb(0, 0, 255);
    }
 
    pre .identifier {
@@ -47,7 +163,7 @@ window.onload = function() {
    }
 
    pre .string {
-     color: #d14;
+     color: rgb(3, 106, 7);
    }
 </style>
 
@@ -59,122 +175,6 @@ hljs.initHighlightingOnLoad();
 
 
 
-<style type="text/css">
-@charset "utf-8";
-
-/**
- * markdown.css
- *
- * This program is free software: you can redistribute it and/or modify it under
- * the terms of the GNU Lesser General Public License as published by the Free
- * Software Foundation, either version 3 of the License, or (at your option) any
- * later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this program. If not, see http://gnu.org/licenses/lgpl.txt.
- *
- * @project      Weblog and Open Source Projects of Florian Wolters
- * @version      GIT: $Id$
- * @package      xhtml-css
- * @author       Florian Wolters <florian.wolters.85@googlemail.com>
- * @copyright    2012 Florian Wolters
- * @cssdoc       version 1.0-pre
- * @license      http://gnu.org/licenses/lgpl.txt GNU Lesser General Public License
- * @link         http://github.com/FlorianWolters/jekyll-bootstrap-theme
- * @media        all
- * @valid        true
- */
-
-body {
-    font-family: Helvetica, Arial, Freesans, clean, sans-serif;
-padding:1em;
-margin:auto;
-max-width:42em;
-background:#fefefe;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-weight: bold;
-}
-
-h1 {
-    color: #000000;
-    font-size: 28px;
-}
-
-h2 {
-    border-bottom: 1px solid #CCCCCC;
-    color: #000000;
-    font-size: 24px;
-}
-
-h3 {
-    font-size: 18px;
-}
-
-h4 {
-    font-size: 16px;
-}
-
-h5 {
-    font-size: 14px;
-}
-
-h6 {
-    color: #777777;
-    background-color: inherit;
-    font-size: 14px;
-}
-
-hr {
-    height: 0.2em;
-    border: 0;
-    color: #CCCCCC;
-    background-color: #CCCCCC;
-}
-
-p, blockquote, ul, ol, dl, li, table, pre {
-    margin: 15px 0;
-}
-
-code, pre {
-    border-radius: 3px;
-    background-color: #F8F8F8;
-    color: inherit;
-}
-
-code {
-    border: 1px solid #EAEAEA;
-    margin: 0 2px;
-    padding: 0 5px;
-}
-
-pre {
-    border: 1px solid #CCCCCC;
-    line-height: 1.25em;
-    overflow: auto;
-    padding: 6px 10px;
-}
-
-pre > code {
-    border: 0;
-    margin: 0;
-    padding: 0;
-}
-
-a, a:visited {
-    color: #4183C4;
-    background-color: inherit;
-    text-decoration: none;
-}
-</style>
-
-
 
 </head>
 
@@ -183,7 +183,7 @@ a, a:visited {
 
 <h2>Introduction</h2>
 
-<p>Welcome to the timeSyncR page! timeSyncR is a package loosely based on the timeSync method for interpreting satellite image time series for calibration and validation of change methods and products. This version has been developed with and for RStudio. </p>
+<p>Welcome to the <a href="http://github.com/bendv/timeSyncR">timeSyncR</a> page! timeSyncR is a package loosely based on the TimeSync method for interpreting satellite image time series for calibration and validation of change methods and products. This version has been developed with and for RStudio. </p>
 
 <p>At the moment only Landsat data are supported. In theory, however, any raster data should work, provided the write metadata are there (more on that later).</p>
 
@@ -194,29 +194,29 @@ a, a:visited {
 <p>First, we have to install and load the package:</p>
 
 <pre><code class="r">library(devtools)
-install_github(&#39;bendv/timeSyncR&#39;)
+install_github(&quot;bendv/timeSyncR&quot;)
 library(timeSyncR)
 </code></pre>
 
 <p><code>timeSyncR</code> comes with an external .tar.gz file containing three RasterBricks (in .grd format) from the three visible bands of the Landsat sensors. To load these files, we first need to find the .tar.gz, untar it and store it in a designated folder. Set your working directory and make a &#39;test&#39; directory in it. Then, identify the .tar.gz file and copy it to your test directory.</p>
 
-<pre><code class="r">setwd(&#39;path/to/working/directory/&#39;)
-dir.create(&#39;test&#39;)
-fl &lt;- system.file(&#39;extdata&#39;, &#39;MDD.tar.gz&#39;, package = &#39;timeSyncR&#39;)
-newfl &lt;- &#39;test/MDD.tar.gz&#39;
+<pre><code class="r">setwd(&quot;path/to/working/directory/&quot;)
+dir.create(&quot;test&quot;)
+fl &lt;- system.file(&quot;extdata&quot;, &quot;MDD.tar.gz&quot;, package = &quot;timeSyncR&quot;)
+newfl &lt;- &quot;test/MDD.tar.gz&quot;
 file.copy(fl, newfl)
 </code></pre>
 
 <p>Now it&#39;s time to untar the copy of the tar file you made.</p>
 
-<pre><code class="r">untar(newfl, exdir = &#39;test&#39;)
+<pre><code class="r">untar(newfl, exdir = &quot;test&quot;)
 </code></pre>
 
 <p>If you look in the &#39;test&#39; folder, you should see three .grd files and their associated .gri files: blue, green and red. Load these into your workspace and check out these rasters</p>
 
-<pre><code class="r">r &lt;- brick(&#39;test/MDD_red.grd&#39;)
-g &lt;- brick(&#39;test/MDD_green.grd&#39;)
-b &lt;- brick(&#39;test/MDD_blue.grd&#39;)
+<pre><code class="r">r &lt;- brick(&quot;test/MDD_red.grd&quot;)
+g &lt;- brick(&quot;test/MDD_green.grd&quot;)
+b &lt;- brick(&quot;test/MDD_blue.grd&quot;)
 
 nlayers(r)
 plot(g, 1:9)
@@ -236,7 +236,7 @@ all(getZ(g) == s$date)
 
 <p>With these RasterBricks in our workspace, we are ready to look at some image chips using <code>tsChipsRGB</code>. It is always a good idea to check out the help file (<code>?tsChipsRGB</code>) before diving in. In this example, we will take an (x,y) coordinate and focus in on that point.</p>
 
-<pre><code class="r">xy &lt;- c(472200, -1294620)
+<pre><code class="r">xy &lt;- c(472000, -1293620)
 tsChipsRGB(xr = r, xg = g, xb = b, loc = xy, start = &quot;2000-01-01&quot;)
 # reset plotting device (optional)
 dev.off()
@@ -249,16 +249,32 @@ plot(pix)
 tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = &quot;2000-01-01&quot;)
 </code></pre>
 
-<p>To display a plot of the time series of each of the bands, set <code>ggplot</code> to <code>TRUE</code>. The <code>ggplot2</code> packages must be installed for this to work.</p>
+<p>To display a plot of the time series of each of the bands, set <code>plot</code> to <code>TRUE</code>. This will show all three bands (corresponding to the red, green and blue channels) as stacked time series plots.</p>
 
-<pre><code class="r">tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = &quot;2000-01-01&quot;, ggplot = TRUE)
+<pre><code class="r">tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = &quot;2000-01-01&quot;, plot = TRUE)
+</code></pre>
+
+<p>For more informative plot labels, set <code>plotlabs</code>:</p>
+
+<pre><code class="r">tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = &quot;2000-01-01&quot;, plot = TRUE, 
+    plotlabs = c(&quot;band3&quot;, &quot;band2&quot;, &quot;band1&quot;))
 </code></pre>
 
 <p>The <code>percNA</code> argument controls the image chips that are &#39;allowed&#39; in the series. A value of 100 allows all images (ie. max percNA = 100%), whereas a value of 0 omits all image chips with any NA&#39;s (from cloud cover or SLC-off gaps). So, to see only images with no NA&#39;s starting in 2005:</p>
 
-<pre><code class="r">tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = &quot;2005-01-01&quot;, percNA = 0)
+<pre><code class="r">tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = &quot;2005-01-01&quot;, percNA = 0, 
+    plot = TRUE)
 </code></pre>
+
+<p>The number of NAs is computed on the fly, depending on the extent of the chips. If a different zoom is specified, this might affect the image dates that are ultimately included. The default value for <code>buff</code> is 17, which indicates the number of pixels in all directions from the centre pixel to be included in the chips (ie. <code>buff=17</code> results in a 35x35 pixel window). Zooming out by setting <code>buff</code> to a higher value will naturally result in more images being excluded (since there is a higher chance of getting a cloud or SLC-off gap in the chip extent).</p>
+
+<pre><code class="r">tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, buff = 50, start = &quot;2005-01-01&quot;, 
+    percNA = 0, plot = TRUE)
+</code></pre>
+
+<p><a href="http://github.com/bendv/timeSyncR">Back to timeSyncR github page</a></p>
 
 </body>
 
 </html>
+

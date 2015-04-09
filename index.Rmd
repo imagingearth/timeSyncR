@@ -68,7 +68,7 @@ all(getZ(g) == s$date)
 With these RasterBricks in our workspace, we are ready to look at some image chips using `tsChipsRGB`. It is always a good idea to check out the help file (`?tsChipsRGB`) before diving in. In this example, we will take an (x,y) coordinate and focus in on that point.
 
 ```{r tsChipsRGB, eval=FALSE}
-xy <- c(472200, -1294620)
+xy <- c(472000, -1293620)
 tsChipsRGB(xr = r, xg = g, xb = b, loc = xy, start = "2000-01-01")
 # reset plotting device (optional)
 dev.off()
@@ -97,12 +97,14 @@ tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = "2000-01-01", plot = TRUE,
 The `percNA` argument controls the image chips that are 'allowed' in the series. A value of 100 allows all images (ie. max percNA = 100%), whereas a value of 0 omits all image chips with any NA's (from cloud cover or SLC-off gaps). So, to see only images with no NA's starting in 2005:
 
 ```{r percNA, eval=FALSE}
-tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = "2005-01-01", percNA = 0)
+tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = "2005-01-01", percNA = 0, plot = TRUE)
 ```
 
 The number of NAs is computed on the fly, depending on the extent of the chips. If a different zoom is specified, this might affect the image dates that are ultimately included. The default value for `buff` is 17, which indicates the number of pixels in all directions from the centre pixel to be included in the chips (ie. `buff=17` results in a 35x35 pixel window). Zooming out by setting `buff` to a higher value will naturally result in more images being excluded (since there is a higher chance of getting a cloud or SLC-off gap in the chip extent).
 
 ```{r percNAbuff, eval=FALSE}
-tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, buff = 50, start = "2005-01-01", percNA = 0)
+tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, buff = 50, start = "2005-01-01", percNA = 0, plot = TRUE)
 ```
 
+
+<a href="http://github.com/bendv/timeSyncR">Back to timeSyncR github page</a>
