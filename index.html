@@ -241,6 +241,16 @@ plot(pix)
 tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = &quot;2000-01-01&quot;)
 </code></pre>
 
+<p>Alternatively, you can select an extent with the <code>drawExtent()</code> function from the raster package. In the case, set <code>buff=0</code> if you want to display exactly that extent (without extra pixels on the edges).</p>
+
+<pre><code class="r">par(op)
+# plot a scene from 2001
+plotRGB(brick(r[[110]], g[[110]], b[[110]]))
+# define two opposite corners of the extent by clicking on the map
+e &lt;- drawExtent()
+tsChipsRGB(xr = r, xg = g, xb = b, loc = e, buff = 0, start = &quot;2000-01-01&quot;)
+</code></pre>
+
 <p>To display a plot of the time series of each of the bands, set <code>plot</code> to <code>TRUE</code>. This will show all three bands (corresponding to the red, green and blue channels) as stacked time series plots.</p>
 
 <pre><code class="r">tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = &quot;2000-01-01&quot;, plot = TRUE)

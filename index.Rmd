@@ -85,6 +85,17 @@ plot(pix)
 tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = "2000-01-01")
 ```
 
+Alternatively, you can select an extent with the `drawExtent()` function from the raster package. In the case, set `buff=0` if you want to display exactly that extent (without extra pixels on the edges).
+
+```{r drawExtent, eval=FALSE}
+par(op)
+# plot a scene from 2001
+plotRGB(brick(r[[110]], g[[110]], b[[110]]))
+# define two opposite corners of the extent by clicking on the map
+e <- drawExtent()
+tsChipsRGB(xr = r, xg = g, xb = b, loc = e, buff = 0, start = "2000-01-01")
+```
+
 To display a plot of the time series of each of the bands, set `plot` to `TRUE`. This will show all three bands (corresponding to the red, green and blue channels) as stacked time series plots.
 
 ```{r plot, eval=FALSE}
