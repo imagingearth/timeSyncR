@@ -5,7 +5,7 @@ timeSyncR
 
 Welcome to the <a href="http://github.com/bendv/timeSyncR">timeSyncR</a> page! timeSyncR is a package loosely based on the TimeSync method for interpreting satellite image time series for calibration and validation of change methods and products. This version has been developed with and for RStudio. 
 
-At the moment only Landsat data are supported. In theory, however, any raster data should work, provided the write metadata are there (more on that later).
+At the moment only Landsat data are supported. In theory, however, any raster data should work, provided the right metadata are there (more on that later).
 
 
 
@@ -74,9 +74,12 @@ With these RasterBricks in our workspace, we are ready to look at some image chi
 
 ```r
 xy <- c(472000, -1293620)
+# save original (default) plotting parameters to workspace
+op <- par()
+
 tsChipsRGB(xr = r, xg = g, xb = b, loc = xy, start = "2000-01-01")
-# reset plotting device (optional)
-dev.off()
+# reset plotting parameters (plotRGB() changes parameters internally)
+par(op)
 ```
 
 
@@ -95,6 +98,7 @@ To display a plot of the time series of each of the bands, set `plot` to `TRUE`.
 
 ```r
 tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = "2000-01-01", plot = TRUE)
+par(op)
 ```
 
 
@@ -103,7 +107,8 @@ For more informative plot labels, set `plotlabs`:
 
 ```r
 tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = "2000-01-01", plot = TRUE, 
-    plotlabs = c("band3", "band2", "band1"))
+    plotlabs = c("band 3", "band 2", "band 1"))
+par(op)
 ```
 
 
@@ -113,6 +118,7 @@ The `percNA` argument controls the image chips that are 'allowed' in the series.
 ```r
 tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = "2005-01-01", percNA = 0, 
     plot = TRUE)
+par(op)
 ```
 
 
@@ -122,6 +128,34 @@ The number of NAs is computed on the fly, depending on the extent of the chips. 
 ```r
 tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, buff = 50, start = "2005-01-01", 
     percNA = 0, plot = TRUE)
+par(op)
+```
+
+
+The resulting chips can be exported as a `list` of raster bricks by setting `exportChips` to `TRUE`:
+
+
+```r
+b <- tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, buff = 50, start = "2005-01-01", 
+    percNA = 0, exportChips = TRUE)
+# e.g. plot the first time step
+plotRGB(b$R[[1]], b$G[[1]], b$B[[1]])
+par(op)
+```
+
+
+The time series for the centre pixel can also be exported as a `list` of ordered vectors (see the `zoo` package) by setting `exportZoo` to `TRUE`:
+
+
+```r
+z <- tsChipsRGB(xr = r, xg = g, xb = b, loc = pix, start = "2005-01-01", percNA = 0, 
+    exportZoo = TRUE)
+par(op)
+par(mfrow = c(3, 1))
+plot(z$R, ylab = "red", xlab = "time")
+plot(z$G, ylab = "green", xlab = "time")
+plot(z$B, ylab = "blue", xlab = "time")
+par(op)
 ```
 
 
